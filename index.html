@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,9 @@
             box-sizing: border-box;
         }
 
+        /* 修改後的 CSS 樣式，已優化標頭區塊的文字可讀性 */
+
+        /* CSS 變數定義 */
         :root {
             --primary: #2563eb;
             --secondary: #7c3aed;
@@ -21,6 +25,13 @@
             --border: #e2e8f0;
         }
 
+        /* 全域基本樣式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', 'Segoe UI', 'Microsoft JhengHei', sans-serif;
             line-height: 1.6;
@@ -28,11 +39,12 @@
             background: var(--light);
         }
 
+        /* 主要容器樣式 */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             background: white;
-            box-shadow: 0 0 40px rgba(0,0,0,0.08);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
         }
 
         /* Language Toggle */
@@ -46,13 +58,13 @@
         }
 
         .lang-text {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
         }
 
         .lang-toggle {
             display: flex;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 25px;
             padding: 3px;
         }
@@ -61,7 +73,7 @@
             padding: 6px 16px;
             border: none;
             background: transparent;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s;
@@ -76,11 +88,16 @@
         /* Header Section */
         .header {
             padding: 60px 40px 40px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background-image: url('resume.png');
+            /* 替換為你的圖片路徑 */
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-size: cover;
             color: white;
             position: relative;
         }
 
+        /* 移除原有的 ::after 偽元素，改用 ::before 創建漸層遮罩 */
         .header::after {
             content: '';
             position: absolute;
@@ -91,18 +108,36 @@
             background: linear-gradient(90deg, var(--accent), var(--secondary), var(--primary));
         }
 
+        /* 新增的漸層遮罩，以改善文字可讀性 */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 這裡使用線性漸層，從上到下，從半透明變為不透明 */
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
+            z-index: 1;
+            /* 確保遮罩在圖片之上 */
+        }
+
+        /* 確保 header 內容在遮罩之上 */
         .header-content {
             display: grid;
             grid-template-columns: auto 1fr;
             gap: 40px;
             align-items: center;
+            position: relative;
+            z-index: 2;
+            /* 確保內容在遮罩之上 */
         }
 
         .photo-wrapper {
             width: 140px;
             height: 140px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             padding: 4px;
             backdrop-filter: blur(10px);
         }
@@ -111,7 +146,7 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -133,7 +168,7 @@
 
         .transition-badge {
             display: inline-block;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -266,7 +301,7 @@
         }
 
         .experience-item:hover {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             border-color: var(--primary);
         }
 
@@ -411,20 +446,20 @@
             .main-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .header-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-            
+
             .photo-wrapper {
                 margin: 0 auto;
             }
-            
+
             .contact-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .sidebar {
                 border-right: none;
                 border-bottom: 1px solid var(--border);
@@ -435,17 +470,18 @@
             .language-bar {
                 display: none;
             }
-            
+
             .container {
                 box-shadow: none;
             }
-            
+
             .experience-item:hover {
                 box-shadow: none;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- Language Toggle Bar -->
@@ -463,7 +499,9 @@
                 <div class="header-content">
                     <div class="photo-wrapper">
                         <div class="photo">
-                            <img src="https://live.staticflickr.com/65535/54725885506_0dfaba59a6_b.jpg" alt="Gordon Liao" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                            <img src="https://live.staticflickr.com/65535/54725885506_0dfaba59a6_b.jpg"
+                                alt="Gordon Liao"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                         </div>
                     </div>
                     <div class="info">
@@ -496,7 +534,8 @@
 
             <section class="summary">
                 <div class="summary-content">
-                    擁有<span class="highlight-text">12年工程設計經驗</span>的專業背景，已完成<span class="highlight-text">4個月密集訓練（500小時）</span>，
+                    擁有<span class="highlight-text">12年工程設計經驗</span>的專業背景，已完成<span
+                        class="highlight-text">4個月密集訓練（500小時）</span>，
                     具備C#全端開發實戰能力。在訓練期間獨立開發社群平台核心模組，成功實作完整功能並優化系統效能。
                     結合工程背景的系統化思維與問題解決能力，能快速理解業務需求並提供可靠的技術方案。
                 </div>
@@ -509,7 +548,7 @@
                             <i class="fas fa-code"></i>
                             技術技能
                         </h2>
-                        
+
                         <div class="skill-group">
                             <div class="skill-group-title">後端開發</div>
                             <div class="skill-tags">
@@ -559,7 +598,7 @@
                             <i class="fas fa-graduation-cap"></i>
                             教育背景
                         </h2>
-                        
+
                         <div class="education-item">
                             <div class="degree">緯育TibaMe全端開發養成班</div>
                             <div class="school">微軟C#全端開發工程師</div>
@@ -609,9 +648,10 @@
                             <i class="fas fa-laptop-code"></i>
                             軟體開發專案
                         </h2>
-                        
+
                         <div class="project-item">
-                            <div class="project-title">Board Game Frontier - 以桌上遊戲社群為切入點，基於ASP.NET Core構建的多功能整合式社群平台</div>
+                            <div class="project-title">Board Game Frontier - 以桌上遊戲社群為切入點，基於ASP.NET Core構建的多功能整合式社群平台
+                            </div>
                             <div class="company">緯育TibaMe專題 | 2025年9月</div>
                             <ul class="responsibilities">
                                 <li>獨立負責社群模組前後端開發，實作完整貼文管理功能</li>
@@ -636,7 +676,7 @@
                             <i class="fas fa-briefcase"></i>
                             工作經歷
                         </h2>
-                        
+
                         <div class="experience-item">
                             <div class="experience-header">
                                 <div class="job-title">管線設計工程師</div>
@@ -688,7 +728,9 @@
                 <div class="header-content">
                     <div class="photo-wrapper">
                         <div class="photo">
-                            <img src="https://live.staticflickr.com/65535/54725885506_0dfaba59a6_b.jpg" alt="Gordon Liao" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                            <img src="https://live.staticflickr.com/65535/54725885506_0dfaba59a6_b.jpg"
+                                alt="Gordon Liao"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                         </div>
                     </div>
                     <div class="info">
@@ -721,10 +763,14 @@
 
             <section class="summary">
                 <div class="summary-content">
-                    Results-driven professional with <span class="highlight-text">12-year engineering design background</span>, 
-                    recently completed <span class="highlight-text">4-month intensive bootcamp (500 hours)</span> in full-stack development. 
-                    Proficient in C#/.NET ecosystem with hands-on project experience developing community platform modules. 
-                    Combines systematic engineering mindset with modern software development skills to deliver robust, scalable solutions.
+                    Results-driven professional with <span class="highlight-text">12-year engineering design
+                        background</span>,
+                    recently completed <span class="highlight-text">4-month intensive bootcamp (500 hours)</span> in
+                    full-stack development.
+                    Proficient in C#/.NET ecosystem with hands-on project experience developing community platform
+                    modules.
+                    Combines systematic engineering mindset with modern software development skills to deliver robust,
+                    scalable solutions.
                 </div>
             </section>
 
@@ -735,7 +781,7 @@
                             <i class="fas fa-code"></i>
                             Technical Skills
                         </h2>
-                        
+
                         <div class="skill-group">
                             <div class="skill-group-title">Backend Development</div>
                             <div class="skill-tags">
@@ -785,7 +831,7 @@
                             <i class="fas fa-graduation-cap"></i>
                             Education
                         </h2>
-                        
+
                         <div class="education-item">
                             <div class="degree">TibaMe Full-Stack Bootcamp</div>
                             <div class="school">Microsoft C# Developer Program</div>
@@ -835,10 +881,11 @@
                             <i class="fas fa-laptop-code"></i>
                             Software Development Projects
                         </h2>
-                        
+
                         <div class="project-item">
                             <div class="project-title">
-                                Board Game Frontier - An integrated community platform for board game enthusiasts, built with ASP.NET Core</div>
+                                Board Game Frontier - An integrated community platform for board game enthusiasts, built
+                                with ASP.NET Core</div>
                             <div class="company">TibaMe Bootcamp Project | Sep 2025</div>
                             <ul class="responsibilities">
                                 <li>Independently developed community module with complete post management</li>
@@ -863,7 +910,7 @@
                             <i class="fas fa-briefcase"></i>
                             Professional Experience
                         </h2>
-                        
+
                         <div class="experience-item">
                             <div class="experience-header">
                                 <div class="job-title">Piping Design Engineer</div>
@@ -874,7 +921,8 @@
                                 <li>Led 3D piping system design for TSMC Kaohsiung/Tainan facilities</li>
                                 <li>Managed cross-functional coordination and design change control</li>
                                 <li>Reviewed vendor technical drawings for compliance and quality</li>
-                                <li>Developed systematic thinking and problem-solving skills transferable to software</li>
+                                <li>Developed systematic thinking and problem-solving skills transferable to software
+                                </li>
                             </ul>
                         </div>
 
@@ -929,33 +977,34 @@
                     }
                 }, 300);
             });
-            
+
             // Show selected language content
             const selectedContent = document.getElementById(lang + '-content');
             if (selectedContent) {
                 selectedContent.classList.add('active');
             }
-            
+
             // Update button states
             const allButtons = document.querySelectorAll('.lang-btn');
             allButtons.forEach(btn => btn.classList.remove('active'));
-            
+
             // Add active class to clicked button
             event.target.classList.add('active');
         }
 
         // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Set styles for language content
             const languageContents = document.querySelectorAll('.language-content');
             languageContents.forEach(content => {
                 content.style.transition = 'opacity 0.3s ease-in-out';
                 content.style.opacity = '1';
             });
-            
+
             // Set Chinese as default
             document.getElementById('en-content').style.display = 'none';
         });
     </script>
 </body>
+
 </html>
